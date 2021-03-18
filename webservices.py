@@ -70,5 +70,20 @@ def todo():
 #             dbcursor.execute(dbrequest)
 #             return 100
 
+#Delete route to specific todo
+@app.route('/todolist/<int:id>', methods=['DELETE'])
+def deleteTodo(id):
+
+    connection = connexion_db()
+    cursor = connection.cursor()
+
+    if request.method == 'DELETE':
+
+        sql_select_Query = "DELETE FROM todo WHERE id=%s"
+        var = [id]
+
+        cursor.execute(sql_select_Query, var)
+        return "ok"
+
 if __name__ == '__main__':
  app.run(host='0.0.0.0', port=8080)
